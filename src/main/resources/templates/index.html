@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="common/header :: common-header"/>
+<body>
+
+<div class="container">
+			<div class="jumbotron">
+			    <h1>Welcome WorldTicket Recruitment Test</h1> 
+			    <p>Develop by Yuttana Khumnual</p> 
+			    <p>Exchange from thai to another currency and another to thai (Buy and Sell)</p> 
+			     <p>-Choose the table rating that you want.</p> 
+			     <p>-Entry the data in Calculate section.</p> 
+			     <p>-Click calculate button.</p>
+			  </div>
+			  
+			  <div class="table-responsive">
+			  
+			<div>
+				<a href="/config" class="btn btn-info" role="button">Add new rating</a>
+			</div>
+			
+        <table name ="ratingTable" id="ratingTable"  class="table table-bordered table-hover table-striped">
+            <thead>
+            <tr>
+                <th>Country</th>
+                <th>Buy (cheaper rate )</th>
+                <th>Buy (expensive rate)</th>
+                <th>Sell (cheaper rate )</th>
+                <th>Sell (expensive rate)</th>
+                <th>Buy value</th>
+                <th>Sell value</th>
+            </tr>
+            </thead>
+            <tbody name ="ratingRow" id="ratingRow">
+            <tr data-th-each="rating : ${rateList}" >
+                <td data-th-text="${rating.country}">...</td>
+                <td data-th-text="${rating.buyMinRate}">...</td>
+                <td data-th-text="${rating.buyMaxRate}">...</td>
+                <td data-th-text="${rating.sellMinRate}">...</td>
+                <td data-th-text="${rating.sellMaxRate}">...</td>
+                <td data-th-text="${rating.buyMinVal}">...</td>
+                <td data-th-text="${rating.sellMinVal}">...</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    	<form class="form-signin" th:action="@{/index}" method="post">
+ 		<h2>Calculation </h2>
+    	<div class="form-group">
+			<select class="form-control" th:value="${exchange.action}" name="action" id="action" required="required">
+                        <option  disabled="disabled" selected="selected"> -- select exchange action -- </option>
+                        <option value="buy" >Buy</option>
+                        <option value="sell" >Sell</option>
+             </select>
+                    
+			</div>
+			
+			
+			<div class="form-group">
+				<label for="usr">Target</label> 
+				<input id="target" type="text" 
+					class="form-control" th:value="${exchange.target}" 
+					name="target" required="required" />
+			</div>
+			
+			<div class="form-group">
+				<label for="usr">Amount</label> 
+				<input type="number" min="0"
+					class="form-control" th:value="${exchange.amount}" id="amount"
+					name="amount" required="required" />
+			</div>
+			<button type="submit" class="btn btn-info" >Calculate</button>
+			
+			<h2>Result Calculate </h2>
+			<div class="form-group">
+				<label for="usr">Rating</label> 
+				<input type="number" min="0"
+					class="form-control" th:value="${exchange.rating}" id="rating"
+					name="rating" required="required" />
+			</div>
+			
+			<div class="form-group">
+				<label for="usr">Result</label> 
+				<input type="number" min="0"
+					class="form-control" th:value="${exchange.result}" id="result"
+					name="result" />
+			</div>
+			
+			
+			
+    	</form>
+	</div>
+</body>
+</html>
+	
+<script>
+
+$("#rating").readOnly = true;
+$("#target").readOnly = true;
+
+ $("#ratingRow tr").click(function() {
+    /* alert($(this).find('td:eq(0)')["0"].innerHTML);  */
+    $("#target").val($(this).find('td:eq(0)')["0"].innerHTML);
+    $("#amount").val("0");
+    
+});
+</script>

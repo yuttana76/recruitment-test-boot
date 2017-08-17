@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="common/header :: common-header" />
+<body>
+
+
+	<!-- <span th:text="${error}">Error message</span> -->
+
+
+	<form class="form-signin" th:action="@{/config}" method="post">
+		<div class="container">
+			<div class="jumbotron">
+			    <h1>Configuration Rating</h1> 
+			    <p>Country should to use the short name(US). 
+			    All rating should to be the number</p> 
+			  </div>
+  
+			<div class="form-group">
+				<label for="usr">Country (Short name)</label> <input type="text"
+					class="form-control" th:value="${rate.country}" id="country"
+					name="country" placeholdder="Enter country name"
+					required="required" />
+			</div>
+
+			<!-- Buy Rate -->
+			<div class="form-group">
+				<label for="usr">Buy rate for large volume:</label> <input type="number" min="0"
+					class="form-control" th:value="${rate.buyMinRate}" iid="buyMinRate"
+					name="buyMinRate" placeholdder="Buy min rate" required="required" />
+			</div>
+
+			<div class="form-group">
+				<label for="usr">Buy rate for small volume:</label> <input type="number" min="0"
+					class="form-control" th:value="${rate.buyMaxRate}" id="buyMaxRate"
+					name="buyMaxRate" placeholdder="Buy max rate" required="required" />
+			</div>
+
+			<!-- Sell Rate -->
+			<div class="form-group">
+				<label for="usr">Sell rate for small volume:</label> <input type="number" min="0"
+					class="form-control" th:value="${rate.sellMinRate}" id="sellMinRate"
+					name="sellMinRate" placeholdder="Sell min rate:"
+					required="required" />
+			</div>
+			
+			<div class="form-group">
+				<label for="usr">Sell rate for large volume:</label> <input type="number" min="0"
+					class="form-control" th:value="${rate.sellMaxRate}" id="sellMaxRate"
+					name="sellMaxRate" placeholdder="Sell min rate:"
+					required="required" />
+			</div>
+			
+
+			<!-- Limit Value -->
+			
+			<div class="form-group">
+				<label for="usr">Buy large volume:</label> <input type="number" min="0"
+					class="form-control" th:value="${rate.buyMinVal}" id="buyMinVal"
+					name="buyMinVal" placeholdder="Buy min value:" required="required" />
+			</div>
+			
+			<div class="form-group">
+				<label for="usr">Sell large volume:</label> <input type="number" min="0"
+					class="form-control" th:value="${rate.sellMinVal}" id="sellMinVal"
+					name="sellMinVal" placeholdder="Sell min value:"
+					required="required" />
+			</div>
+			
+		
+			<div class="btn-group">
+				<button type="submit" class="btn btn-info" >SAVE</button>
+				<a href="/" class="btn btn-info" role="button">Cancel</a>
+			</div>
+
+
+		</div>
+	</form>
+
+	<!-- <div th:replace="common/header :: body-bottom-scripts"/> -->
+</body>
+</html>
